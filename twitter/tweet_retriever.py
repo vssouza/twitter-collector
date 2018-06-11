@@ -17,17 +17,21 @@ class TweetRetriever(StreamListener):
         try:
             print(status)
         except BaseException as e:
-            print("Error on data: %s" % str(e))
+            ("[%s] Error on data: %s" % str(datetime.now()), str(e))
         return True
 
     def on_limit(self, track):
-        print("Rate Limit Exceeded, Sleep for 15 Mins")
+        print("[%s] Rate Limit Exceeded, Sleep for 15 Mins" % str(datetime.now()))
         time.sleep(15 * 60)
         return True
 
     def on_connect(self):
-        print("Twitter connection stablished at: %s" % str(datetime.now()))
+        print("[%s] Twitter connection stablished" % str(datetime.now()))
+
+    def on_disconnect(self, notice):
+        print("[%s] Disconnected by Twitter host: %s" % str(datetime.now()), notice)
+        return False
 
     def on_error(self, status_code):
-        print("Error received %s" % status_code)
+        print("[%s] Error received from Twitter host: %s" % str(datetime.now()), status_code)
         return True
