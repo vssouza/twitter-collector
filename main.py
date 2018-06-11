@@ -16,6 +16,6 @@ api = tweepy.API(auth)
 tweet_retriever = TweetRetriever(consumer_key, consumer_secret, access_secret, access_secret, 'temp')
 
 twitter_stream = Stream(auth, tweet_retriever)
-twitter_stream.filter(track=['#fortnite'])
+twitter_stream.filter(track=['#fortnite'], languages=['en'])
 
 

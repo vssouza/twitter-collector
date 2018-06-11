@@ -1,7 +1,8 @@
+import time
 from tweepy import OAuthHandler
 from tweepy import API
 from tweepy.streaming import StreamListener
-from time import sleep
+from datetime import datetime
 
 
 class TweetRetriever(StreamListener):
@@ -21,8 +22,11 @@ class TweetRetriever(StreamListener):
 
     def on_limit(self, track):
         print("Rate Limit Exceeded, Sleep for 15 Mins")
-        sleep(15 * 60)
+        time.sleep(15 * 60)
         return True
+
+    def on_connect(self):
+        print("Twitter connection stablished at: %s" % str(datetime.now()))
 
     def on_error(self, status_code):
         print("Error received %s" % status_code)
