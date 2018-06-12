@@ -13,13 +13,13 @@ class TestMongoDBStorage(TestCase):
     def test_write(self):
         test_json = {'_id': '123ab-456cd-789ef', 'test': 'data'}
         data = {'collection': 'test_collection', 'json': test_json}
-        mongodb_collector = self.mongo_setup()
+        mongodb_collector = self.server_setup()
         future = go(mongodb_collector.write, data)
         result = self.server_proceed(future)
         self.assertEqual(test_json["_id"], result)
-        self.mongo_shutdown()
+        self.server_shutdown()
 
-    def mongo_setup(self):
+    def server_setup(self):
         self.server = MockupDB(auto_ismaster={"maxWireVersion": 3})
         self.server.run()
         return MongoDBStorage(self.server.uri, self.database)
@@ -29,5 +29,5 @@ class TestMongoDBStorage(TestCase):
         cmd.ok()
         return future()
 
-    def mongo_shutdown(self):
+    def server_shutdown(self):
         self.server.stop()
