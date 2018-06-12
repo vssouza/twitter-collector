@@ -1,4 +1,5 @@
 import time
+import json
 from tweepy import OAuthHandler
 from tweepy import API
 from tweepy.streaming import StreamListener
@@ -15,7 +16,8 @@ class TweetRetriever(StreamListener):
 
     def on_status(self, status):
         try:
-            print(status)
+            tweet_json = json.dumps(status._json)
+            self.dump.write(tweet_json)
         except BaseException as e:
             ("[%s] Error on data: %s" % str(datetime.now()), str(e))
         return True
