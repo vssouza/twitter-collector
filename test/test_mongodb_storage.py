@@ -1,20 +1,33 @@
 from unittest import TestCase
 from storage import MongoDBStorage
+from mockupdb import go, MockupDB
 
 
 class TestMongoDBStorage(TestCase):
 
     hostname = "localhost"
-    port = 27017
     username = "admin"
     password = "admin"
     database = "test_db"
 
     def test_write(self):
-        mongodb_collector = MongoDBStorage(self.hostname, self.port, self.username, self.password, self.database)
-        test_json = {"test": "data"}
-        data = {"collection": "test_collection", "json": test_json}
-        data["object_id"] = mongodb_collector.write(data)
-        retrieved_json = mongodb_collector.read_by_id(data)
-        mongodb_collector.close()
-        self.assertEqual(test_json["test"], retrieved_json["test"])
+        test_json = {'_id': '123ab-456cd-789ef', 'test': 'data'}
+        data = {'collection': 'test_collection', 'json': test_json}
+        mongodb_collector = self.mongo_setup()
+        future = go(mongodb_collector.write, data)
+        result = self.server_proceed(future)
+        self.assertEqual(test_json["_id"], result)
+        self.mongo_shutdown()
+
+    def mongo_setup(self):
+        self.server = MockupDB(auto_ismaster={"maxWireVersion": 3})
+        self.server.run()
+        return MongoDBStorage(self.server.uri, self.database)
+
+    def server_proceed(self, future):
+        cmd = self.server.receives()
+        cmd.ok()
+        return future()
+
+    def mongo_shutdown(self):
+        self.server.stop()
