@@ -13,7 +13,7 @@ class ScreenStorage(CollectorStore):
     def update(self, data):
         raise UnsupportedOperationError()
 
-    def read(self, data):
+    def read_by_id(self, data):
         raise UnsupportedOperationError()
 
     def read_all(self):

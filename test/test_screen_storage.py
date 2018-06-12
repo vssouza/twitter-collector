@@ -11,7 +11,7 @@ class TestScreenStorage(TestCase):
     def test_create(self, mock_stdout):
         text = "Print to screen\n"
         screen_storage = ScreenStorage()
-        screen_storage.create("Print to screen")
+        screen_storage.write("Print to screen")
         self.assertEqual(mock_stdout.getvalue(), text)
 
     def test_remove(self):
@@ -21,6 +21,10 @@ class TestScreenStorage(TestCase):
     def test_update(self):
         screen_storage = ScreenStorage()
         self.assertRaises(UnsupportedOperationError, screen_storage.update, 1)
+
+    def test_read_by_id(self):
+        screen_storage = ScreenStorage()
+        self.assertRaises(UnsupportedOperationError, screen_storage.read_by_id, 'attribute')
 
     def test_read_by_attribute(self):
         screen_storage = ScreenStorage()
