@@ -28,3 +28,5 @@ class ScreenStorage(CollectorStore):
     def read_by_attributes(self, data):
         raise UnsupportedOperationError()
 
+    def close(self):
+        raise UnsupportedOperationError()

@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod
+from abc import abstractmethod
 
 
 class CollectorStore:
@@ -33,4 +33,8 @@ class CollectorStore:
 
     @abstractmethod
     def remove_all(self):
+        pass
+
+    @abstractmethod
+    def close(self):
         pass

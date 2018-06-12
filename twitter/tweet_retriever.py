@@ -19,21 +19,21 @@ class TweetRetriever(StreamListener):
             tweet_json = json.dumps(status._json)
             self.dump.write(tweet_json)
         except BaseException as e:
-            ("[%s] Error on data: %s" % str(datetime.now()), str(e))
+            "[{0}] Error on data: {1}".format(str(datetime.now()), str(e))
         return True
 
     def on_limit(self, track):
-        print("[%s] Rate Limit Exceeded, Sleep for 15 Mins" % str(datetime.now()))
+        print("[{0}] Rate Limit Exceeded, Sleep for 15 Mins".format(str(datetime.now())))
         time.sleep(15 * 60)
         return True
 
     def on_connect(self):
-        print("[%s] Twitter connection stablished" % str(datetime.now()))
+        print("[{0}] Twitter connection stablished".format(str(datetime.now())))
 
     def on_disconnect(self, notice):
-        print("[%s] Disconnected by Twitter host: %s" % str(datetime.now()), notice)
+        print("[{0}] Disconnected by Twitter host: {1}".format(str(datetime.now()), notice))
         return False
 
     def on_error(self, status_code):
-        print("[%s] Error received from Twitter host: %s" % str(datetime.now()), status_code)
+        print("[{0}] Error received from Twitter host: {1}".format(str(datetime.now()), status_code))
         return True

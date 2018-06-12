@@ -8,7 +8,7 @@ import unittest.mock
 class TestScreenStorage(TestCase):
 
     @unittest.mock.patch('sys.stdout', new_callable=StringIO)
-    def test_create(self, mock_stdout):
+    def test_write(self, mock_stdout):
         text = "Print to screen\n"
         screen_storage = ScreenStorage()
         screen_storage.write("Print to screen")
