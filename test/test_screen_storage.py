@@ -22,9 +22,17 @@ class TestScreenStorage(TestCase):
         screen_storage = ScreenStorage()
         self.assertRaises(UnsupportedOperationError, screen_storage.update, 1)
 
-    def test_read(self):
+    def test_read_by_attribute(self):
         screen_storage = ScreenStorage()
-        self.assertRaises(UnsupportedOperationError, screen_storage.read, 1)
+        self.assertRaises(UnsupportedOperationError, screen_storage.read_by_attribute, 'attribute', 'value')
+
+    def test_read_by_attributes(self):
+        screen_storage = ScreenStorage()
+        attributes = {
+            'attribute_1': 'value',
+            'attribute_2': 'value_b',
+        }
+        self.assertRaises(UnsupportedOperationError, screen_storage.read_by_attributes, attributes)
 
     def test_read_all(self):
         screen_storage = ScreenStorage()

@@ -21,3 +21,10 @@ class ScreenStorage(CollectorStore):
 
     def remove_all(self):
         raise UnsupportedOperationError()
+
+    def read_by_attribute(self, attribute, value):
+        raise UnsupportedOperationError()
+
+    def read_by_attributes(self, data):
+        raise UnsupportedOperationError()
+

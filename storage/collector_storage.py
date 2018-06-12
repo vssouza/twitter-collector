@@ -16,7 +16,15 @@ class CollectorStore:
         pass
 
     @abstractmethod
-    def read(self, data):
+    def read_by_id(self, data):
+        pass
+
+    @abstractmethod
+    def read_by_attribute(self, attribute, value):
+        pass
+
+    @abstractmethod
+    def read_by_attributes(self, data):
         pass
 
     @abstractmethod
