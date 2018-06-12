@@ -37,3 +37,7 @@ class MongoDBStorage(CollectorStore):
 
     def close(self):
         self.client.close()
+
+    @staticmethod
+    def get_mongodb_url(hostname, port, username, password):
+        return "mongodb://{0}:{1}@{3}:{4}/".format(username, password, hostname, port)
