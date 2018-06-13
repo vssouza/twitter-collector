@@ -1,6 +1,5 @@
-from storage.collector_storage import CollectorStore
+from storage.db_storage import CollectorStore
 from pymongo import MongoClient
-from exception import UnsupportedOperationError
 
 
 class MongoDBStorage(CollectorStore):
@@ -12,14 +11,6 @@ class MongoDBStorage(CollectorStore):
     def write(self, data):
         collection = self.database[data['collection']]
         return collection.insert_one(data['json']).inserted_id
-
-    def remove_by_id(self, data):
-        collection = self.database[data['collection']]
-        return collection.delete_one({'_id': data['object_id']}).deleted_count
-
-    def remove_by_attributes(self, data):
-        collection = self.database[data['collection']]
-        return collection.delete_many(data['attributes']).deleted_count
 
     def update_by_id(self, data):
         collection = self.database[data['collection']]
@@ -37,13 +28,21 @@ class MongoDBStorage(CollectorStore):
         collection = self.database[data['collection']]
         return collection.find({})
 
+    def read_by_attributes(self, data):
+        collection = self.database[data['collection']]
+        return collection.find(data['attributes'])
+
+    def remove_by_id(self, data):
+        collection = self.database[data['collection']]
+        return collection.delete_one({'_id': data['object_id']}).deleted_count
+
     def remove_all(self, data):
         collection = self.database[data['collection']]
         return collection.delete_many({}).deleted_count
 
-    def read_by_attributes(self, data):
+    def remove_by_attributes(self, data):
         collection = self.database[data['collection']]
-        return collection.find(data['attributes'])
+        return collection.delete_many(data['attributes']).deleted_count
 
     def drop_database(self):
         self.client.drop_database(self.database)

@@ -1,2 +1,1 @@
 from storage.mongodb_storage import MongoDBStorage
-from storage.screen_storage import ScreenStorage

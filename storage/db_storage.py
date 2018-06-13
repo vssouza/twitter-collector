@@ -16,7 +16,11 @@ class CollectorStore:
         pass
 
     @abstractmethod
-    def update(self, data):
+    def update_by_id(self, data):
+        pass
+
+    @abstractmethod
+    def update_by_attributes(self, data):
         pass
 
     @abstractmethod

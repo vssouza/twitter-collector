@@ -36,4 +36,4 @@ class TweetRetriever(StreamListener):
 
     def on_error(self, status_code):
         print("[{0}] Error received from Twitter host: {1}".format(str(datetime.now()), status_code))
-        return True
+        return False
