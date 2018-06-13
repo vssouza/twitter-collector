@@ -1,0 +1,13 @@
+# Just run docker-compose up to start and docker-compose down to stop in this directory
+version: '2.0'
+
+services:
+
+  mongo-db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"

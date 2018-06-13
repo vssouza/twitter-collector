@@ -8,7 +8,11 @@ class CollectorStore:
         pass
 
     @abstractmethod
-    def remove(self, data):
+    def remove_by_id(self, data):
+        pass
+
+    @abstractmethod
+    def remove_by_attributes(self, data):
         pass
 
     @abstractmethod
@@ -20,19 +24,15 @@ class CollectorStore:
         pass
 
     @abstractmethod
-    def read_by_attribute(self, attribute, value):
-        pass
-
-    @abstractmethod
     def read_by_attributes(self, data):
         pass
 
     @abstractmethod
-    def read_all(self):
+    def read_all(self, data):
         pass
 
     @abstractmethod
-    def remove_all(self):
+    def remove_all(self, data):
         pass
 
     @abstractmethod

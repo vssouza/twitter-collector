@@ -7,7 +7,10 @@ class ScreenStorage(CollectorStore):
     def write(self, data):
         print(data)
 
-    def remove(self, data):
+    def remove_by_id(self, data):
+        raise UnsupportedOperationError()
+
+    def remove_by_attributes(self, data):
         raise UnsupportedOperationError()
 
     def update(self, data):
@@ -16,13 +19,10 @@ class ScreenStorage(CollectorStore):
     def read_by_id(self, data):
         raise UnsupportedOperationError()
 
-    def read_all(self):
+    def read_all(self, data):
         raise UnsupportedOperationError()
 
-    def remove_all(self):
-        raise UnsupportedOperationError()
-
-    def read_by_attribute(self, attribute, value):
+    def remove_all(self, data):
         raise UnsupportedOperationError()
 
     def read_by_attributes(self, data):

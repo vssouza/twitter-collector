@@ -13,31 +13,47 @@ class MongoDBStorage(CollectorStore):
         collection = self.database[data['collection']]
         return collection.insert_one(data['json']).inserted_id
 
-    def remove(self, data):
-        raise UnsupportedOperationError()
+    def remove_by_id(self, data):
+        collection = self.database[data['collection']]
+        return collection.delete_one({'_id': data['object_id']}).deleted_count
 
-    def update(self, data):
-        raise UnsupportedOperationError()
+    def remove_by_attributes(self, data):
+        collection = self.database[data['collection']]
+        return collection.delete_many(data['attributes']).deleted_count
+
+    def update_by_id(self, data):
+        collection = self.database[data['collection']]
+        return collection.update_one({'_id': data['object_id']}, {"$set": data['json']}, upsert=False)
+
+    def update_by_attributes(self, data):
+        collection = self.database[data['collection']]
+        return collection.update_many(data['attributes'], {"$set": data['json']}, upsert=False)
 
     def read_by_id(self, data):
         collection = self.database[data['collection']]
-        return collection.find_one({"_id": data['object_id']})
+        return collection.find_one({'_id': data['object_id']})
 
-    def read_all(self):
-        raise UnsupportedOperationError()
+    def read_all(self, data):
+        collection = self.database[data['collection']]
+        return collection.find({})
 
-    def remove_all(self):
-        raise UnsupportedOperationError()
-
-    def read_by_attribute(self, attribute, value):
-        raise UnsupportedOperationError()
+    def remove_all(self, data):
+        collection = self.database[data['collection']]
+        return collection.delete_many({}).deleted_count
 
     def read_by_attributes(self, data):
-        raise UnsupportedOperationError()
+        collection = self.database[data['collection']]
+        return collection.find(data['attributes'])
+
+    def drop_database(self):
+        self.client.drop_database(self.database)
+
+    def drop_collection(self, data):
+        self.database.drop_collection(data['collection'])
 
     def close(self):
         self.client.close()
 
     @staticmethod
     def get_mongodb_url(hostname, port, username, password):
-        return "mongodb://{0}:{1}@{3}:{4}/".format(username, password, hostname, port)
+        return "mongodb://{0}:{1}@{2}:{3}/".format(username, password, hostname, port)
