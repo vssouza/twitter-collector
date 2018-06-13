@@ -1,6 +1,7 @@
 from unittest import TestCase
 from storage import MongoDBStorage
 from bson import ObjectId
+from exception import InvalidParameterError
 
 
 class TestMongoDBStorage(TestCase):
@@ -46,6 +47,12 @@ class TestMongoDBStorage(TestCase):
         data = {'collection': 'test_collection', 'object_id': ObjectId('53fbf4615c3b9f41c381b6a3')}
         result = self.mongodb_collector.read_by_id(data)
         self.assertEqual(result['name'], "john")
+
+    def test_no_collection(self):
+        self.setup_db_initial_data()
+        data = {'object_id': ObjectId('53fbf4615c3b9f41c381b6a3')}
+        with self.assertRaises(InvalidParameterError):
+            self.mongodb_collector.read_by_id(data)
 
     def test_read_by_attributes(self):
         self.setup_db_initial_data()
