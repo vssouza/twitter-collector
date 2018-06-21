@@ -1,10 +1,10 @@
 import time
 import json
-import logging
 from tweepy import OAuthHandler
 from tweepy import API
 from tweepy.streaming import StreamListener
 from datetime import datetime
+from log import ConsoleLogger
 
 
 class TweetRetriever(StreamListener):
@@ -13,13 +13,7 @@ class TweetRetriever(StreamListener):
         self.auth = OAuthHandler(consumer_key, consumer_secret)
         self.auth.set_access_token(access_token, access_secret)
         self.api = API(self.auth, wait_on_rate_limit=True)
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.INFO)
-        ch = logging.StreamHandler()
-        ch.setLevel(logging.INFO)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        ch.setFormatter(formatter)
-        self.logger.addHandler(ch)
+        self.logger = ConsoleLogger(__name__, ConsoleLogger.INFO)
 
     def on_status(self, status):
         try:
