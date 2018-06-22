@@ -1,1 +1,2 @@
-from log.screen_logger import ScreenLogger
+from log.console_logger import ConsoleLogger
+from log.log_util import LogUtil

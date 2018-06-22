@@ -4,20 +4,21 @@ from tweepy import OAuthHandler
 from tweepy import API
 from tweepy.streaming import StreamListener
 from datetime import datetime
+from log import ConsoleLogger
 
 
 class TweetRetriever(StreamListener):
 
-    def __init__(self, consumer_key, consumer_secret, access_token, access_secret, dump):
+    def __init__(self, consumer_key, consumer_secret, access_token, access_secret):
         self.auth = OAuthHandler(consumer_key, consumer_secret)
         self.auth.set_access_token(access_token, access_secret)
         self.api = API(self.auth, wait_on_rate_limit=True)
-        self.dump = dump
+        self.logger = ConsoleLogger(__name__, ConsoleLogger.INFO)
 
     def on_status(self, status):
         try:
             tweet_json = json.dumps(status._json)
-            self.dump.write(tweet_json)
+            self.logger.info(tweet_json)
         except BaseException as e:
             "[{0}] Error on data: {1}".format(str(datetime.now()), str(e))
         return True
