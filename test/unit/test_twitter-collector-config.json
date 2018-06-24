@@ -1,0 +1,32 @@
+{
+  "logs": [
+    {
+      "name": "test-console-log",
+      "type": "console",
+      "level": "DEBUG",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    },
+    {
+      "name": "file-log",
+      "type": "file",
+      "level": "DEBUG",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "path": "D:\\tmp"
+    }
+  ],
+  "database": {
+    "name": "mongodb",
+    "address": "localhost",
+    "port": 27017,
+    "database": "tweets",
+    "username": "admin",
+    "password": "admin"
+  },
+  "mq": {
+    "name": "rabbit-server",
+    "address": "localhost",
+    "port": 5672,
+    "username": "user",
+    "password": "user"
+  }
+}
