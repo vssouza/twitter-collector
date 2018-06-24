@@ -11,7 +11,9 @@
       "type": "file",
       "level": "DEBUG",
       "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-      "path": "D:\\tmp"
+      "path": "D:\\tmp",
+      "file-size": "1MB",
+      "backup-count": 5
     }
   ],
   "database": {
