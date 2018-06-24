@@ -11,10 +11,10 @@ class Main:
         self.config_file_path = os.path.dirname(__file__)
         self.config_file_path = os.path.join(self.config_file_path, "resources", ConfigUtil.CONFIG_FILENAME)
         self.config = ConfigurationLoader(self.config_file_path)
-        self.consumer_key = 'YDZ1ka1OjlOpIR8hqx36b28uJ'
-        self.consumer_secret = 'gdFvF9fhLenaR6yj4nkUrpRKQwFb8IrHhXGXdmjSkzdLCcCish'
-        self.access_token = '999273792030507008-JWCIJtlpW2FDAdEeJkpRvD4nKBdWDij'
-        self.access_secret = 'pLp0xdbWbB0Y1zLYKmmzWX2XcBg8qiDcLEZz355V3uPHn'
+        self.consumer_key = ''
+        self.consumer_secret = ''
+        self.access_token = ''
+        self.access_secret = ''
 
     def run(self):
         auth = OAuthHandler(self.consumer_key, self.consumer_secret)
