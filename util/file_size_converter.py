@@ -2,7 +2,7 @@
 class FileSizeConverter:
 
     @staticmethod
-    def convert_size(self, file_size):
+    def convert_size(file_size):
         if file_size.lower().endswith('gb'):
             value = int(file_size[-2])
             return value * 1024 * 1024 * 1024
