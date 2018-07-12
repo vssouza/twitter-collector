@@ -1,4 +1,4 @@
 from storage.mongodb_storage import MongoDBStorage
 from storage.db_storage import CollectorDBStorage
 from storage.queue_storage import CollectorQueueStorage
-from storage.queue_storage
+from storage.rabbitmq_storage import RabbitMQStorage
