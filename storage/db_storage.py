@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 
-class CollectorStore:
+class CollectorDBStorage:
 
     @abstractmethod
     def write(self, data):
