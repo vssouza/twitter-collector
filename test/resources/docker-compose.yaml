@@ -11,3 +11,14 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: admin
     ports:
       - "27017:27017"
+
+  rabbit-mq:
+    image: rabbitmq:3-management
+    restart: always
+    environment:
+      RABBITMQ_ERLANG_COOKIE: 'mysecretcookie'
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
