@@ -1,9 +1,9 @@
-from storage.db_storage import CollectorStore
+from storage.db_storage import CollectorDBStorage
 from pymongo import MongoClient
 from exception import InvalidParameterError
 
 
-class MongoDBStorage(CollectorStore):
+class MongoDBStorage(CollectorDBStorage):
 
     def __init__(self, url, database):
         self._client = MongoClient(url)
