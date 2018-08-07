@@ -30,5 +30,13 @@
     "port": 5672,
     "username": "user",
     "password": "user"
+  },
+  "twitter": {
+    "consumerkey": "",
+    "consumersecret": "",
+    "accesstoken": "",
+    "accesssecret": "",
+    "hashtag": "#fortnite",
+    "language": "en"
   }
 }
