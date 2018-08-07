@@ -10,3 +10,7 @@ class CollectorQueueStorage:
     @abstractmethod
     def consume(self):
         pass
+
+    @abstractmethod
+    def create_partition(self):
+        pass
