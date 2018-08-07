@@ -16,7 +16,7 @@ services:
     image: rabbitmq:3-management
     restart: always
     environment:
-      RABBITMQ_ERLANG_COOKIE: 'mysecretcookie'
+      RABBITMQ_ERLANG_COOKIE: "mysecretcookie"
       RABBITMQ_DEFAULT_USER: "rabbitmq"
       RABBITMQ_DEFAULT_PASS: "rabbitmq"
     ports:
